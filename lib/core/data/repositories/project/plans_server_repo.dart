@@ -39,7 +39,24 @@ class PlansServerRepo extends PlansRepo {
   }
 
   @override
-  Stream<Plan> watchPlans() {
-    throw UnimplementedError();
+  Future<Result<List<Plan>>> getPlans() async {
+    try {
+      final response = await _supabase.functions.invoke(
+        SupabaseConstants.getPlansMethod,
+        method: HttpMethod.get,
+      );
+      final plans =
+          (response.data['plans'] as List)
+              .map((e) => Plan.fromJson(e))
+              .toList();
+      return Result.ok(plans);
+    } on TypeError catch (e) {
+      log('Error getting plans: $e');
+      log('Error getting plans stack trace: ${e.stackTrace}');
+      return Result.error(e);
+    } catch (e) {
+      log('Error getting plans: $e');
+      return Result.error(e);
+    }
   }
 }

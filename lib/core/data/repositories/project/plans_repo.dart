@@ -9,5 +9,5 @@ abstract class PlansRepo extends Dependency {
     required int retryAttempt,
   });
 
-  Stream<Plan> watchPlans();
+  Future<Result<List<Plan>>> getPlans();
 }

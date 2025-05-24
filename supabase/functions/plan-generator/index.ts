@@ -3,6 +3,11 @@ import { callGemini } from "./call_gemini.ts";
 import { PlanResponse } from "./types.ts";
 import { MOCK_PLAN } from "./mock_debug.ts";
 
+// inside the HTTP handler, AFTER we have `plan: PlanResponse`
+import { supabase } from "./supabase_client.ts";
+import { savePlan } from "./save_plan.ts";
+
+
 const isDebugMode = true; // ← set true to skip Gemini & use MOCK_PLAN
 const JSON_HEADER = { "Content-Type": "application/json" };
 
@@ -14,6 +19,19 @@ const GEMINI_API_KEY =
 
 // Main entrypoint
 Deno.serve(async (req) => {
+  /* 1 · extract user from bearer token */
+  const auth = req.headers.get("Authorization") ?? "";
+  const jwt = auth.startsWith("Bearer ") ? auth.substring(7) : "";
+
+  const { data: userResp, error: userErr } = await supabase.auth.getUser(jwt);
+  if (userErr || !userResp?.user) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: JSON_HEADER,
+    });
+  }
+  const userId = userResp.user.id;
+
   // ── 1 · method guard
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -60,6 +78,19 @@ Deno.serve(async (req) => {
         headers: JSON_HEADER,
       });
     }
+  }
+
+  /* 2 · persist */
+  try {
+    if (!isDebugMode) {
+      await savePlan(userId, size_hint, plan);
+    }
+  } catch (dbErr) {
+    console.error("[DB]", dbErr);
+    return new Response(JSON.stringify({ error: "Database insert failed" }), {
+      status: 500,
+      headers: JSON_HEADER,
+    });
   }
 
   // ── 4 · return JSON

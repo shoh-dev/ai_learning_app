@@ -28,7 +28,7 @@ class Plan {
       mode: json['mode'] ?? 'milestones',
       milestones:
           (json['milestones'] as List<dynamic>? ?? [])
-              .map((e) => Milestone.fromJson(e as Map<String, dynamic>))
+              .map((e) => Milestone.fromJson(e as Map))
               .toList(),
     );
   }
@@ -61,18 +61,18 @@ class Milestone {
     required this.canGenerateImage,
   });
 
-  factory Milestone.fromJson(Map<String, dynamic> json) {
+  factory Milestone.fromJson(Map json) {
     return Milestone(
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       resourceUrl: json['resource_url'] as String?,
       substeps:
           (json['substeps'] as List<dynamic>? ?? [])
-              .map((e) => Substep.fromJson(e as Map<String, dynamic>))
+              .map((e) => Substep.fromJson(e as Map))
               .toList(),
       quiz:
           json['quiz'] != null
-              ? Quiz.fromJson(json['quiz'] as Map<String, dynamic>)
+              ? Quiz.fromJson((json['quiz'] as List).first as Map)
               : null,
       canGenerateImage: json['can_generate_image'] ?? false,
     );
@@ -103,14 +103,14 @@ class Substep {
     this.estimatedMinutes,
   });
 
-  factory Substep.fromJson(Map<String, dynamic> json) {
+  factory Substep.fromJson(Map json) {
     return Substep(
       title: json['title'] ?? '',
       detailUrl: json['detail_url'] as String?,
       downloadUrl: json['download_url'] as String?,
       actionHint:
           json['action_hint'] != null
-              ? ActionHint.fromJson(json['action_hint'] as Map<String, dynamic>)
+              ? ActionHint.fromJson(json['action_hint'] as Map)
               : null,
       estimatedMinutes: json['estimated_minutes'] as int?,
     );
@@ -131,7 +131,7 @@ class ActionHint {
 
   ActionHint({required this.icon, required this.value});
 
-  factory ActionHint.fromJson(Map<String, dynamic> json) =>
+  factory ActionHint.fromJson(Map json) =>
       ActionHint(icon: json['icon'] ?? '', value: json['value'] ?? '');
 
   Map<String, dynamic> toJson() => {'icon': icon, 'value': value};
@@ -148,7 +148,7 @@ class Quiz {
     required this.correctAnswerIndex,
   });
 
-  factory Quiz.fromJson(Map<String, dynamic> json) => Quiz(
+  factory Quiz.fromJson(Map json) => Quiz(
     question: json['question'] ?? '',
     choices: (json['choices'] as List<dynamic>? ?? []).cast<String>().toList(),
     correctAnswerIndex: json['correct_answer_index'] ?? 0,

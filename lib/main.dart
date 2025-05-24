@@ -4,9 +4,9 @@ import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_server_repo.dart';
 import 'package:ai_learning_app/core/data/supabase_initializer.dart';
 import 'package:ai_learning_app/core/theming/theming.dart';
+import 'package:ai_learning_app/features/plans/view/plans_layout.dart';
 import 'package:ai_learning_app/features/root/view/root_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myspace_core/myspace_core.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
@@ -18,7 +18,7 @@ void main() async {
   // await HiveInitializer.init();
   final supabase = await SupabaseInitializer.init();
 
-  UIRoot root(AppStore store) => UIRoot(layouts: [rootLayout]);
+  UIRoot root(AppStore store) => UIRoot(layouts: [rootLayout, plansLayout]);
   final appStore = AppStore();
   final uiTheme = UITheme(
     themeMode: (context) => ThemeMode.light,

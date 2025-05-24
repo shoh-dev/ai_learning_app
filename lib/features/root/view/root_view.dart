@@ -12,8 +12,16 @@ class RootView extends StatelessWidget {
       backgroundColor: context.colorScheme.primary,
       appBar: AppBar(
         title: Text('AI Learning App'),
-        // backgroundColor: context.colorScheme.primary,
-        // foregroundColor: context.colorScheme.onPrimary,
+        leading: Builder(
+          builder: (context) {
+            return ButtonComponent.iconOutlined(
+              icon: Icons.menu,
+              onPressed: () {
+                context.push('/plans');
+              },
+            ).sized(width: 32, height: 32);
+          },
+        ),
       ),
       bottomSheet: _BottomSheet(),
       extendBody: true,
@@ -52,7 +60,7 @@ class _BottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.read<RootVm>();
     return Container(
-      height: context.height * .25,
+      height: context.height * .3,
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -65,7 +73,7 @@ class _BottomSheet extends StatelessWidget {
         command: vm.generatePlanCommand,
         builder: (context, _) {
           return Column(
-            spacing: 32,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextFieldComponent(
                 hintText: "Enter Topic",
@@ -99,7 +107,12 @@ class _ErrorWidet extends StatelessWidget {
         color: context.colorScheme.errorContainer,
         borderRadius: context.borderRadius,
       ),
-      child: Text(error),
+      child: Text(
+        error,
+        style: context.textTheme.bodyMedium!.copyWith(
+          color: context.colorScheme.onErrorContainer,
+        ),
+      ),
     );
   }
 }
