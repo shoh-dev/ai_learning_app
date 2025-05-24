@@ -11,7 +11,7 @@ final _rootPage = UIPage(
   path: '/',
   builder:
       (context, state) => ChangeNotifierProvider(
-        create: (context) => RootVm(),
+        create: (context) => RootVm(context.read()),
         builder: (context, child) => const RootView(),
       ),
 );

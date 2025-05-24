@@ -12,8 +12,8 @@ class RootView extends StatelessWidget {
       backgroundColor: context.colorScheme.primary,
       appBar: AppBar(
         title: Text('AI Learning App'),
-        backgroundColor: context.colorScheme.primary,
-        foregroundColor: context.colorScheme.onPrimary,
+        // backgroundColor: context.colorScheme.primary,
+        // foregroundColor: context.colorScheme.onPrimary,
       ),
       bottomSheet: _BottomSheet(),
       extendBody: true,
@@ -24,7 +24,7 @@ class RootView extends StatelessWidget {
             final bottom = MediaQuery.paddingOf(context).bottom;
             final isKeyboardVisible = bottom > 0;
             return AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: Durations.short4,
               padding: EdgeInsets.symmetric(horizontal: 48),
               color: Colors.transparent,
               height:
@@ -61,26 +61,45 @@ class _BottomSheet extends StatelessWidget {
         ),
         color: context.colorScheme.surface,
       ),
-      child: VmSelector<RootVm, bool>(
-        selector: (context, vm) => vm.isGeneratingPlan,
-        builder: (context, isGeneratingPlan, child) {
+      child: CommandWrapper(
+        command: vm.generatePlanCommand,
+        builder: (context, _) {
           return Column(
             spacing: 32,
             children: [
               TextFieldComponent(
                 hintText: "Enter Topic",
-                enabled: !isGeneratingPlan,
+                enabled: !vm.generatePlanCommand.isRunning,
                 controller: vm.topicController,
               ),
+              if (vm.generatePlanCommand.isError)
+                _ErrorWidet(error: vm.generatePlanCommand.errorMessage),
               ButtonComponent.primary(
                 text: 'Generate Plan',
-                isLoading: isGeneratingPlan,
-                onPressed: vm.onGeneratePlan,
+                isLoading: vm.generatePlanCommand.isRunning,
+                onPressed: vm.generatePlanCommand.execute,
               ).sized(width: context.width, height: 56),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class _ErrorWidet extends StatelessWidget {
+  const _ErrorWidet({required this.error});
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: context.colorScheme.errorContainer,
+        borderRadius: context.borderRadius,
+      ),
+      child: Text(error),
     );
   }
 }

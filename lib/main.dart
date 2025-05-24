@@ -1,5 +1,8 @@
 import 'package:ai_learning_app/core/data/hive_initializer.dart';
-import 'package:ai_learning_app/core/data/repositories/project/projects_local_repo.dart';
+import 'package:ai_learning_app/core/data/repositories/project/plans_local_repo.dart';
+import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
+import 'package:ai_learning_app/core/data/repositories/project/plans_server_repo.dart';
+import 'package:ai_learning_app/core/data/supabase_initializer.dart';
 import 'package:ai_learning_app/core/theming/theming.dart';
 import 'package:ai_learning_app/features/root/view/root_layout.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +15,8 @@ class AppStore extends CoreAppStore {}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await HiveInitializer.init();
+  // await HiveInitializer.init();
+  final supabase = await SupabaseInitializer.init();
 
   UIRoot root(AppStore store) => UIRoot(layouts: [rootLayout]);
   final appStore = AppStore();
@@ -21,11 +25,7 @@ void main() async {
     theme: appTheme,
   );
   final dependencies = [
-    Provider(
-      create:
-          (context) =>
-              ProjectsLocalRepo(Hive.box<String>(HiveBoxes.projectsBox)),
-    ),
+    Provider<PlansRepo>(create: (context) => PlansServerRepo(supabase)),
   ];
   final config = CoreAppConfig(
     root: root,
