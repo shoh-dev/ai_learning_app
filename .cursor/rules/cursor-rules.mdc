@@ -1,0 +1,70 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📝 Cursor Rules – AI Learning App (Videos + Resources)
+
+## 1 · Folder & File Structure
+1. Place production code in `/lib`.
+2. Use **top-level vertical slices**:  
+lib/
+core/ // shared utils, theme, networking, constants
+features/
+        /some_feature
+                    /views
+                    /vm
+
+3. **Snake_case** all file and folder names (`topic_prompt_screen.dart`).
+4. Put **one widget or class per file**; tests mirror the path in `/test`.
+5. Add (or update) a barrel file (`widgets.dart`) when you add a new widget.
+
+## 2 · Design Tokens & Theming
+1. Source global colours from `core/theme/app_colors.dart`.  
+* `primary` → #004E50  
+* `surface` → #FFFFFF  
+* `background` → #F5F7F8
+2. Use an **8-px spacing scale** (`4, 8, 12, 16, 24`).
+3. Corner radius: **8 px** for cards & buttons.
+4. Shadow level 1: `0 2 4 4 rgba(0,0,0,0.06)`.
+5. Typography: Inter/Roboto; default body size 16.
+
+## 3 · Responsive Layout
+1. Break-points:  
+* ≥ 1280 px → sidebar  
+* 640–1279 px → collapsed sidebar  
+* < 640 px → bottom nav
+2. Use `LayoutBuilder` or `MediaQuery`—no magic numbers.
+3. Prefer `Flexible`/`Expanded` over nested `SizedBox` chains.
+
+## 4 · Widgets & Components
+1. **TopicPromptScreen** → centred `TextField` + CTA button.  
+Put in `ui/screens/topic_prompt_screen.dart`.
+2. **ResultsScreen** → `DefaultTabController(length: 2)` with **Videos** / **Resources** tabs.  
+3. **TaskCard** reusable: thumbnail 72×72, title, 2-line description, optional duration badge.  
+4. Export reusable widgets via `ui/widgets/widgets.dart`.
+
+## 5 · Accessibility & UX
+1. Every `Image`/`CachedNetworkImage` needs meaningful `semanticLabel`.
+2. Buttons require `tooltip` or `semanticLabel`.
+3. Minimum touch target 48×48 dp.
+
+## 6 · Coding Best Practices
+1. Keep UI and data classes separate—no network calls inside widgets.
+2. **No magic strings/numbers** in widgets; pull from constants or theme.
+3. Favor **named constructors** for clarity (`Task.fromJson`).
+4. All public methods/classes get /// dartdoc.
+5. Write at least one **widget-test** per screen; mock Supabase with stubs.
+
+## 7 · Commit & Pull-Request Etiquette
+1. One feature or fix per branch.
+2. PR title: `[feat/ui] TopicPrompt ⟶ functional`.
+3. Require passing **Flutter test** + **dart format –set-exit-if-changed** before merge.
+
+## 8 · TODO / FIXME Tags
+* `// TODO(cursor): …` for tasks you want Cursor to expand later.
+* `// FIXME(cursor): …` for intentional red flags that need attention.
+
+---
+
+_That’s it—keep it pragmatic and focused so Cursor can auto-apply these rules without over-constraining your future choices._
