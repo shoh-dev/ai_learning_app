@@ -374,8 +374,320 @@ export const MOCK_PLAN: PlanResponse = {
   ],
 };
 
-// {"topic":"Uzbek Pilaf (Osh) Cooking","mode":"milestones","milestones":[{"title":"Understanding the Basics of Uzbek Pilaf","description":"Learn about the history, regional variations, and key ingredients that define authentic Uzbek Pilaf (Osh).","resource_url":"https://www.allrecipes.com/recipe/213258/authentic-uzbek-pilaf/","substeps":[{"title":"Research the history and cultural significance of Uzbek Pilaf.","detail_url":null,"download_url":null,"estimated_minutes":15},{"title":"Identify the core ingredients: rice, meat (usually lamb or beef), carrots, onions, oil, and spices.","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Explore regional variations in ingredients and cooking methods.","detail_url":null,"download_url":null,"estimated_minutes":10}],"quiz":{"question":"Which ingredient is NOT traditionally used in Uzbek Pilaf?","choices":["Rice","Lamb","Carrots","Potatoes"],"correct_answer_index":3},"can_generate_image":false},{"title":"Gathering the Right Ingredients","description":"Source high-quality ingredients, focusing on the specific type of rice and meat suitable for Pilaf.","resource_url":null,"substeps":[{"title":"Select the right type of rice (e.g., Devzira, Arborio, or Calrose).","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Choose the appropriate cut of meat (lamb shoulder or beef chuck are good options).","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Find fresh carrots (yellow carrots are preferred, if available) and onions.","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Assemble the necessary spices: cumin, coriander, barberries, and salt.","detail_url":null,"download_url":null,"estimated_minutes":5}],"quiz":{"question":"Which type of rice is traditionally preferred for Uzbek Pilaf?","choices":["Basmati","Jasmine","Devzira","Sushi Rice"],"correct_answer_index":2},"can_generate_image":false},{"title":"Preparing the Ingredients","description":"Properly prepare each ingredient by washing the rice, cutting the meat and vegetables, and measuring the spices.","resource_url":null,"substeps":[{"title":"Wash the rice thoroughly until the water runs clear. Soak the rice for at least 30 minutes.","detail_url":null,"download_url":null,"action_hint":{"icon":"timer","value":"30 min"},"estimated_minutes":35},{"title":"Cut the meat into 1-inch cubes.","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Slice the carrots into matchsticks (julienne).","detail_url":null,"download_url":null,"estimated_minutes":15},{"title":"Dice the onions.","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Measure out the spices.","detail_url":null,"download_url":null,"estimated_minutes":5}],"can_generate_image":false},{"title":"Cooking the Zirvak (Base)","description":"Master the technique of creating the 'zirvak,' the flavorful base of the pilaf, by browning the meat and caramelizing the vegetables.","resource_url":null,"substeps":[{"title":"Heat oil in a heavy-bottomed pot or kazan over medium-high heat.","detail_url":null,"download_url":null,"estimated_minutes":2},{"title":"Brown the meat in batches, ensuring not to overcrowd the pot.","detail_url":null,"download_url":null,"estimated_minutes":15},{"title":"Add the onions and cook until golden brown.","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Add the carrots and cook until softened and slightly caramelized.","detail_url":null,"download_url":null,"estimated_minutes":15},{"title":"Add the spices and salt, and cook for another minute.","detail_url":null,"download_url":null,"estimated_minutes":1}],"can_generate_image":true},{"title":"Layering and Simmering","description":"Properly layer the rice over the zirvak and simmer the pilaf until the rice is cooked through and the liquid is absorbed.","resource_url":null,"substeps":[{"title":"Gently layer the rice over the zirvak, spreading it evenly.","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Pour hot water over the rice to cover it by about 1 inch.","detail_url":null,"download_url":null,"estimated_minutes":2},{"title":"Bring to a boil, then reduce heat to low, cover, and simmer for 20-25 minutes, or until the rice is cooked and the liquid is absorbed.","detail_url":null,"download_url":null,"action_hint":{"icon":"timer","value":"20-25 min"},"estimated_minutes":25}],"can_generate_image":true},{"title":"Resting and Serving","description":"Allow the pilaf to rest before serving to allow the flavors to meld and the rice to fully absorb any remaining moisture.","resource_url":null,"substeps":[{"title":"Turn off the heat and let the pilaf rest, covered, for 10-15 minutes.","detail_url":null,"download_url":null,"action_hint":{"icon":"timer","value":"10-15 min"},"estimated_minutes":15},{"title":"Fluff the rice gently with a fork before serving.","detail_url":null,"download_url":null,"estimated_minutes":2},{"title":"Serve hot, garnished with fresh herbs (optional).","detail_url":null,"download_url":null,"estimated_minutes":3}],"can_generate_image":true},{"title":"Troubleshooting Common Issues","description":"Learn how to address common problems like mushy rice, burnt bottom, or undercooked meat.","resource_url":null,"substeps":[{"title":"Understand the causes of mushy rice and how to prevent it (e.g., using the correct rice-to-water ratio).","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Learn how to prevent the bottom from burning (e.g., using a heavy-bottomed pot and maintaining low heat).","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Understand how to ensure the meat is fully cooked (e.g., browning it properly and simmering for the correct amount of time).","detail_url":null,"download_url":null,"estimated_minutes":10}],"can_generate_image":false},{"title":"Experimenting with Variations","description":"Explore different variations of Uzbek Pilaf, such as using different meats, vegetables, or spices.","resource_url":null,"substeps":[{"title":"Try using beef or chicken instead of lamb.","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Experiment with adding different vegetables, such as chickpeas or garlic.","detail_url":null,"download_url":null,"estimated_minutes":5},{"title":"Adjust the spice levels to your preference.","detail_url":null,"download_url":null,"estimated_minutes":5}],"can_generate_image":true},{"title":"Mastering the Kazan Technique","description":"Dive deeper into using a traditional kazan (cauldron) for optimal Pilaf cooking.","resource_url":null,"substeps":[{"title":"Research the benefits of using a kazan for Pilaf.","detail_url":null,"download_url":null,"estimated_minutes":10},{"title":"Learn how to properly season and maintain a kazan.","detail_url":null,"download_url":null,"action_hint":{"icon":"build","value":"Seasoning"},"estimated_minutes":15},{"title":"Practice cooking Pilaf in a kazan to develop your technique.","detail_url":null,"download_url":null,"estimated_minutes":60}],"can_generate_image":true}]}
+// export const MOCK_PLAN: PlanResponse = {
+//   topic: "Uzbek Pilaf (Osh) Cooking",
+//   mode: "milestones",
+//   milestones: [
+//     {
+//       title: "Understanding the Basics of Uzbek Pilaf",
+//       description:
+//         "Learn about the history, regional variations, and key ingredients that define authentic Uzbek Pilaf (Osh).",
+//       resource_url:
+//         "https://www.allrecipes.com/recipe/213258/authentic-uzbek-pilaf/",
+//       substeps: [
+//         {
+//           title:
+//             "Research the history and cultural significance of Uzbek Pilaf.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title:
+//             "Identify the core ingredients: rice, meat (usually lamb or beef), carrots, onions, oil, and spices.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title:
+//             "Explore regional variations in ingredients and cooking methods.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//       ],
+//       quiz: {
+//         question: "Which ingredient is NOT traditionally used in Uzbek Pilaf?",
+//         choices: ["Rice", "Lamb", "Carrots", "Potatoes"],
+//         correct_answer_index: 3,
+//       },
+//       can_generate_image: false,
+//     },
+//     {
+//       title: "Gathering the Right Ingredients",
+//       description:
+//         "Source high-quality ingredients, focusing on the specific type of rice and meat suitable for Pilaf.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title:
+//             "Select the right type of rice (e.g., Devzira, Arborio, or Calrose).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title:
+//             "Choose the appropriate cut of meat (lamb shoulder or beef chuck are good options).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title:
+//             "Find fresh carrots (yellow carrots are preferred, if available) and onions.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title:
+//             "Assemble the necessary spices: cumin, coriander, barberries, and salt.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//       ],
+//       quiz: {
+//         question:
+//           "Which type of rice is traditionally preferred for Uzbek Pilaf?",
+//         choices: ["Basmati", "Jasmine", "Devzira", "Sushi Rice"],
+//         correct_answer_index: 2,
+//       },
+//       can_generate_image: false,
+//     },
+//     {
+//       title: "Preparing the Ingredients",
+//       description:
+//         "Properly prepare each ingredient by washing the rice, cutting the meat and vegetables, and measuring the spices.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title:
+//             "Wash the rice thoroughly until the water runs clear. Soak the rice for at least 30 minutes.",
+//           detail_url: null,
+//           download_url: null,
+//           action_hint: { icon: "timer", value: "30 min" },
+//           estimated_minutes: 35,
+//         },
+//         {
+//           title: "Cut the meat into 1-inch cubes.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title: "Slice the carrots into matchsticks (julienne).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title: "Dice the onions.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title: "Measure out the spices.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//       ],
+//       can_generate_image: false,
+//     },
+//     {
+//       title: "Cooking the Zirvak (Base)",
+//       description:
+//         "Master the technique of creating the 'zirvak,' the flavorful base of the pilaf, by browning the meat and caramelizing the vegetables.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title:
+//             "Heat oil in a heavy-bottomed pot or kazan over medium-high heat.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 2,
+//         },
+//         {
+//           title:
+//             "Brown the meat in batches, ensuring not to overcrowd the pot.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title: "Add the onions and cook until golden brown.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title:
+//             "Add the carrots and cook until softened and slightly caramelized.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title: "Add the spices and salt, and cook for another minute.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 1,
+//         },
+//       ],
+//       can_generate_image: true,
+//     },
+//     {
+//       title: "Layering and Simmering",
+//       description:
+//         "Properly layer the rice over the zirvak and simmer the pilaf until the rice is cooked through and the liquid is absorbed.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title: "Gently layer the rice over the zirvak, spreading it evenly.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title: "Pour hot water over the rice to cover it by about 1 inch.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 2,
+//         },
+//         {
+//           title:
+//             "Bring to a boil, then reduce heat to low, cover, and simmer for 20-25 minutes, or until the rice is cooked and the liquid is absorbed.",
+//           detail_url: null,
+//           download_url: null,
+//           action_hint: { icon: "timer", value: "20-25 min" },
+//           estimated_minutes: 25,
+//         },
+//       ],
+//       can_generate_image: true,
+//     },
+//     {
+//       title: "Resting and Serving",
+//       description:
+//         "Allow the pilaf to rest before serving to allow the flavors to meld and the rice to fully absorb any remaining moisture.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title:
+//             "Turn off the heat and let the pilaf rest, covered, for 10-15 minutes.",
+//           detail_url: null,
+//           download_url: null,
+//           action_hint: { icon: "timer", value: "10-15 min" },
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title: "Fluff the rice gently with a fork before serving.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 2,
+//         },
+//         {
+//           title: "Serve hot, garnished with fresh herbs (optional).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 3,
+//         },
+//       ],
+//       can_generate_image: true,
+//     },
+//     {
+//       title: "Troubleshooting Common Issues",
+//       description:
+//         "Learn how to address common problems like mushy rice, burnt bottom, or undercooked meat.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title:
+//             "Understand the causes of mushy rice and how to prevent it (e.g., using the correct rice-to-water ratio).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title:
+//             "Learn how to prevent the bottom from burning (e.g., using a heavy-bottomed pot and maintaining low heat).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title:
+//             "Understand how to ensure the meat is fully cooked (e.g., browning it properly and simmering for the correct amount of time).",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//       ],
+//       can_generate_image: false,
+//     },
+//     {
+//       title: "Experimenting with Variations",
+//       description:
+//         "Explore different variations of Uzbek Pilaf, such as using different meats, vegetables, or spices.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title: "Try using beef or chicken instead of lamb.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title:
+//             "Experiment with adding different vegetables, such as chickpeas or garlic.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//         {
+//           title: "Adjust the spice levels to your preference.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 5,
+//         },
+//       ],
+//       can_generate_image: true,
+//     },
+//     {
+//       title: "Mastering the Kazan Technique",
+//       description:
+//         "Dive deeper into using a traditional kazan (cauldron) for optimal Pilaf cooking.",
+//       resource_url: null,
+//       substeps: [
+//         {
+//           title: "Research the benefits of using a kazan for Pilaf.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 10,
+//         },
+//         {
+//           title: "Learn how to properly season and maintain a kazan.",
+//           detail_url: null,
+//           download_url: null,
+//           action_hint: { icon: "build", value: "Seasoning" },
+//           estimated_minutes: 15,
+//         },
+//         {
+//           title: "Practice cooking Pilaf in a kazan to develop your technique.",
+//           detail_url: null,
+//           download_url: null,
+//           estimated_minutes: 60,
+//         },
+//       ],
+//       can_generate_image: true,
+//     },
+//   ],
+// };
 
+// export const MOCK_PLAN: PlanResponse =
 // {
 //     "topic": "Cooking Russian Borsh",
 //     "mode": "milestones",

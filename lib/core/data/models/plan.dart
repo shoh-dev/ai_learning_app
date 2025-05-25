@@ -4,6 +4,7 @@
 // ----------------------------------------------
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:ai_learning_app/core/utils/generate_id.dart';
 
@@ -72,7 +73,7 @@ class Milestone {
               .toList(),
       quiz:
           json['quiz'] != null
-              ? Quiz.fromJson((json['quiz'] as List).first as Map)
+              ? Quiz.fromJson(((json['quiz'] as List).firstOrNull ?? {}) as Map)
               : null,
       canGenerateImage: json['can_generate_image'] ?? false,
     );
@@ -148,11 +149,16 @@ class Quiz {
     required this.correctAnswerIndex,
   });
 
-  factory Quiz.fromJson(Map json) => Quiz(
-    question: json['question'] ?? '',
-    choices: (json['choices'] as List<dynamic>? ?? []).cast<String>().toList(),
-    correctAnswerIndex: json['correct_answer_index'] ?? 0,
-  );
+  factory Quiz.fromJson(Map json) {
+    return Quiz(
+      question: json['question'] ?? '',
+      choices:
+          (json['quiz_choices'] as List? ?? [])
+              .map((e) => e['choice_text'] as String)
+              .toList(),
+      correctAnswerIndex: json['correct_answer_index'] ?? 0,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'question': question,

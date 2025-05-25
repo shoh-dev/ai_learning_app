@@ -15,11 +15,12 @@ class PlansVm extends Vm {
 
   Future<Result<void>> _getPlans() async {
     final result = await _plansRepo.getPlans();
-    if (result.isOk) {
+    result.fold((p0) {
       plans.clear();
-      plans.addAll((result as ResultOk<List<Plan>>).value);
+      plans.addAll(p0);
       notifyListeners();
-    }
+    }, (p0) {});
+
     return result;
   }
 }

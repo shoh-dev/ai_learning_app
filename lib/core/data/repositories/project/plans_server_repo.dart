@@ -54,8 +54,9 @@ class PlansServerRepo extends PlansRepo {
       log('Error getting plans: $e');
       log('Error getting plans stack trace: ${e.stackTrace}');
       return Result.error(e);
-    } catch (e) {
+    } catch (e, st) {
       log('Error getting plans: $e');
+      log('Error getting plans stack trace: $st');
       return Result.error(e);
     }
   }

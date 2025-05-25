@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:ai_learning_app/core/data/models/plan.dart';
 import 'package:ai_learning_app/features/plans/vm/plans_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -7,25 +10,38 @@ class PlansView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.read<PlansVm>();
     return Scaffold(
       appBar: AppBar(title: Text('Plans')),
-      body: VmWatcher<PlansVm>(
-        builder: (context, vm, child) {
+      body: CommandWrapper(
+        command: vm.getPlansCommand,
+        builder: (context, child) {
           final command = vm.getPlansCommand;
           if (command.isRunning) {
             return Center(child: CircularProgressIndicator.adaptive());
           }
-          return RefreshIndicator.adaptive(
-            onRefresh: vm.getPlansCommand.execute,
-            child: ListView.builder(
-              itemCount: vm.plans.length,
-              itemBuilder: (context, index) {
-                final plan = vm.plans[index];
-                return ListTile(title: Text(plan.topic));
-              },
-            ),
-          );
+          return child!;
         },
+        child: VmSelector<PlansVm, List<Plan>>(
+          selector: (ctx, vm) => vm.plans,
+          builder: (context, plans, child) {
+            return RefreshIndicator.adaptive(
+              onRefresh: vm.getPlansCommand.execute,
+              child: ListView.builder(
+                itemCount: plans.length,
+                itemBuilder: (context, index) {
+                  final plan = plans[index];
+                  return ListTile(
+                    title: Text(plan.topic),
+                    onTap: () {
+                      //todo:
+                    },
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
