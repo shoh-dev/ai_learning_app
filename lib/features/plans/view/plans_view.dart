@@ -4,6 +4,7 @@ import 'package:ai_learning_app/core/data/models/plan.dart';
 import 'package:ai_learning_app/features/plans/vm/plans_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
+import 'package:myspace_ui/myspace_ui.dart';
 
 class PlansView extends StatelessWidget {
   const PlansView({super.key});
@@ -34,7 +35,7 @@ class PlansView extends StatelessWidget {
                   return ListTile(
                     title: Text(plan.topic),
                     onTap: () {
-                      //todo:
+                      context.push("/plans/${plan.id}");
                     },
                   );
                 },

@@ -8,6 +8,7 @@ const String _anonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 abstract class SupabaseConstants {
   static const String planGeneratorMethod = 'plan-generator';
   static const String getPlansMethod = 'get-plans';
+  static const String getPlanMethod = 'get-plan';
   static const String plansTable = 'plans';
 }
 

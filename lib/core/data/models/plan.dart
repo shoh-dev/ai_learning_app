@@ -24,7 +24,7 @@ class Plan {
   /// Fallback factory – tolerates missing / null keys
   factory Plan.fromJson(Map<String, dynamic> json) {
     return Plan(
-      id: generateId('plan'),
+      id: json['id'],
       topic: json['topic'] ?? '',
       mode: json['mode'] ?? 'milestones',
       milestones:
@@ -105,13 +105,14 @@ class Substep {
   });
 
   factory Substep.fromJson(Map json) {
+    print(json);
     return Substep(
       title: json['title'] ?? '',
       detailUrl: json['detail_url'] as String?,
       downloadUrl: json['download_url'] as String?,
       actionHint:
-          json['action_hint'] != null
-              ? ActionHint.fromJson(json['action_hint'] as Map)
+          json['action_hints'] != null
+              ? ActionHint.fromJson(json['action_hints'] as Map)
               : null,
       estimatedMinutes: json['estimated_minutes'] as int?,
     );

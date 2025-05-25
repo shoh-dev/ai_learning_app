@@ -1,5 +1,3 @@
-import 'package:ai_learning_app/core/data/hive_initializer.dart';
-import 'package:ai_learning_app/core/data/repositories/project/plans_local_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_server_repo.dart';
 import 'package:ai_learning_app/core/data/supabase_initializer.dart';

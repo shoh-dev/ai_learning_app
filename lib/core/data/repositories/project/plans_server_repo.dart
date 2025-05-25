@@ -60,4 +60,20 @@ class PlansServerRepo extends PlansRepo {
       return Result.error(e);
     }
   }
+
+  @override
+  Future<Result<Plan>> getPlan({required String id}) async {
+    try {
+      final response = await _supabase.functions.invoke(
+        SupabaseConstants.getPlanMethod,
+        method: HttpMethod.get,
+        queryParameters: {'id': id},
+      );
+      final plan = Plan.fromJson(response.data);
+      return Result.ok(plan);
+    } catch (e) {
+      log('Error getting plan: $e');
+      return Result.error(e);
+    }
+  }
 }
