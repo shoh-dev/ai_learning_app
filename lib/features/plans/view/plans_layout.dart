@@ -34,8 +34,11 @@ final _planDetailsPage = UIPage(
   builder:
       (context, state) => ChangeNotifierProvider(
         create:
-            (context) =>
-                PlanDetailsVm(context.read(), state.pathParameters['id']!),
+            (context) => PlanDetailsVm(
+              planId: state.pathParameters['id']!,
+              plansRepo: context.read(),
+              urlLauncherService: context.read(),
+            ),
         builder: (context, child) => const PlanDetailsView(),
       ),
 );

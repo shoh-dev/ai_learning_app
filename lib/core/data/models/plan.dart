@@ -1,32 +1,22 @@
-// lib/data/models/plan_models.dart
+// lib/data/models/plan.dart
 // ----------------------------------------------
 // Plain-Dart model classes (no code-gen)
 // ----------------------------------------------
 
 import 'dart:convert';
-import 'dart:developer';
-
-import 'package:ai_learning_app/core/utils/generate_id.dart';
 
 class Plan {
   final String id;
   final String topic;
-  final String mode;
   final List<Milestone> milestones;
 
-  Plan({
-    required this.id,
-    required this.topic,
-    required this.mode,
-    required this.milestones,
-  });
+  Plan({required this.id, required this.topic, required this.milestones});
 
   /// Fallback factory – tolerates missing / null keys
   factory Plan.fromJson(Map<String, dynamic> json) {
     return Plan(
       id: json['id'],
       topic: json['topic'] ?? '',
-      mode: json['mode'] ?? 'milestones',
       milestones:
           (json['milestones'] as List<dynamic>? ?? [])
               .map((e) => Milestone.fromJson(e as Map))
@@ -36,7 +26,6 @@ class Plan {
 
   Map<String, dynamic> toJson() => {
     'topic': topic,
-    'mode': mode,
     'milestones': milestones.map((e) => e.toJson()).toList(),
   };
 
@@ -105,7 +94,6 @@ class Substep {
   });
 
   factory Substep.fromJson(Map json) {
-    print(json);
     return Substep(
       title: json['title'] ?? '',
       detailUrl: json['detail_url'] as String?,

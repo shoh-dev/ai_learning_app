@@ -1,3 +1,4 @@
+import 'package:ai_learning_app/core/theming/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
@@ -10,9 +11,9 @@ AppTheme appTheme(BuildContext context) {
     // surface: const Color(0xFFFFFFFF),
     // ),
     // colorSchemeLight: ColorScheme.fromSeed(seedColor: const Color(0xFF004E50)),
-    colorSchemeLight: ColorScheme.light().copyWith(
-      outline: Colors.grey.shade300,
-    ),
+    // colorSchemeLight: ColorScheme.light().copyWith(
+    //   outline: Colors.grey.shade300,
+    // ),
     scaffoldBackgroundColorLight: const Color(0xFFF5F7F8),
   );
 }
