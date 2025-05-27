@@ -29,6 +29,7 @@ export interface Milestone {
 }
 
 export interface PlanResponse {
+  id: string;
   topic: string;
   mode: "milestones";
   milestones: Milestone[];

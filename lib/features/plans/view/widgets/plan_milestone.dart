@@ -198,14 +198,14 @@ class _QuizState extends State<_Quiz> with AutomaticKeepAliveClientMixin {
             border: Border.all(
               color:
                   isCorrect
-                      ? context.colorScheme.primary
+                      ? Colors.green
                       : isWrong
                       ? context.colorScheme.error
                       : Colors.grey.shade300,
             ),
             color:
                 isCorrect
-                    ? context.colorScheme.primary.withOpacity(.1)
+                    ? Colors.green.withOpacity(.1)
                     : isWrong
                     ? context.colorScheme.error.withOpacity(.1)
                     : null,
@@ -216,7 +216,8 @@ class _QuizState extends State<_Quiz> with AutomaticKeepAliveClientMixin {
                 child: Text(
                   choice,
                   style: TextStyle(
-                    color: isCorrect ? context.colorScheme.primary : null,
+                    color: isCorrect ? Colors.green : null,
+                    fontWeight: isCorrect ? FontWeight.w600 : null,
                   ),
                 ),
               ),
@@ -229,7 +230,7 @@ class _QuizState extends State<_Quiz> with AutomaticKeepAliveClientMixin {
                 size: 15,
                 color:
                     isCorrect
-                        ? context.colorScheme.primary
+                        ? Colors.green
                         : isWrong
                         ? context.colorScheme.error
                         : null,

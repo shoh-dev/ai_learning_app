@@ -4,7 +4,6 @@ import 'package:ai_learning_app/core/data/supabase_initializer.dart';
 import 'package:ai_learning_app/core/services/url_launcher_service.dart';
 import 'package:ai_learning_app/core/theming/theme.dart';
 import 'package:ai_learning_app/core/theming/theming.dart';
-import 'package:ai_learning_app/features/plans/view/plans_layout.dart';
 import 'package:ai_learning_app/features/root/view/root_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -18,7 +17,7 @@ void main() async {
   // await HiveInitializer.init();
   final supabase = await SupabaseInitializer.init();
 
-  UIRoot root(AppStore store) => UIRoot(layouts: [rootLayout, plansLayout]);
+  UIRoot root(AppStore store) => UIRoot(layouts: [rootLayout]);
   final appStore = AppStore();
   final uiTheme = UITheme(
     themeMode: (context) => ThemeMode.light,

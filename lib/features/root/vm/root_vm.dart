@@ -5,14 +5,24 @@ import 'package:myspace_core/myspace_core.dart';
 
 class RootVm extends Vm {
   final PlansRepo _plansRepo;
+  final void Function(Result? result) onGeneratePlan;
 
-  RootVm(this._plansRepo) {
-    generatePlanCommand = CommandNoParam(_generatePlan);
+  RootVm(this._plansRepo, this.onGeneratePlan) {
+    generatePlanCommand = CommandNoParam(_generatePlan)..addListener(() {
+      onGeneratePlan(generatePlanCommand.result);
+    });
   }
 
   final topicController = TextEditingController(
     text: 'Learn python from scratch',
   );
+
+  PlanSize _planSize = PlanSize.quick;
+  PlanSize get planSize => _planSize;
+  set planSize(PlanSize value) {
+    _planSize = value;
+    notifyListeners();
+  }
 
   late final CommandNoParam<void> generatePlanCommand;
 
@@ -23,14 +33,15 @@ class RootVm extends Vm {
   }
 
   Future<Result<void>> _generatePlan() async {
-    final topic = topicController.text;
-    final size = PlanSize.full;
+    final topic = topicController.text.trim();
+    final size = planSize;
     final attempt = 1;
     final plan = await _plansRepo.createPlan(
       topic: topic,
       size: size,
       retryAttempt: attempt,
     );
+    if (plan.isOk) topicController.clear();
     return plan;
   }
 }

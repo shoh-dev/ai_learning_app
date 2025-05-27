@@ -32,6 +32,10 @@ class PlansServerRepo extends PlansRepo {
       );
       final plan = Plan.fromJson(response.data);
       return Result.ok(plan);
+    } on TypeError catch (e, st) {
+      log('Error creating plan TypeError: $e');
+      log('Error creating plan TypeError st: $st');
+      return Result.error(e);
     } catch (e) {
       log('Error creating plan: $e');
       return Result.error(e);

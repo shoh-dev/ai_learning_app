@@ -7,6 +7,7 @@
 import { PlanResponse } from "./types.ts";
 
 export const MOCK_PLAN: PlanResponse = {
+  id: '3858b57d-3250-4352-adfb-e51d081998b0',
   topic: "Python Programming",
   mode: "milestones",
   milestones: [

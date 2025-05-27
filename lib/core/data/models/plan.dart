@@ -9,14 +9,21 @@ class Plan {
   final String id;
   final String topic;
   final List<Milestone> milestones;
+  final DateTime createdAt;
 
-  Plan({required this.id, required this.topic, required this.milestones});
+  Plan({
+    required this.id,
+    required this.topic,
+    required this.milestones,
+    required this.createdAt,
+  });
 
   /// Fallback factory – tolerates missing / null keys
   factory Plan.fromJson(Map<String, dynamic> json) {
     return Plan(
       id: json['id'],
       topic: json['topic'] ?? '',
+      createdAt: DateTime.parse(json['created_at']),
       milestones:
           (json['milestones'] as List<dynamic>? ?? [])
               .map((e) => Milestone.fromJson(e as Map))

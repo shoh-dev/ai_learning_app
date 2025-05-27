@@ -13,6 +13,7 @@ final _plansBranch = UIBranch(pages: [_plansPage]);
 
 final _plansPage = UIPage(
   path: '/plans',
+  transitionType: TransitionType.cupertino,
   pages: [_planDetailsPage],
   builder:
       (context, state) => ChangeNotifierProvider(
@@ -31,6 +32,7 @@ final _planDetailsPage = UIPage(
     }
     return null;
   },
+  transitionType: TransitionType.cupertino,
   builder:
       (context, state) => ChangeNotifierProvider(
         create:
