@@ -23,6 +23,18 @@ class _LottieCircleAvatarState extends State<LottieCircleAvatar>
   }
 
   @override
+  void dispose() {
+    if (lottieController.isAnimating) {
+      lottieController.stop();
+      lottieController.dispose();
+    } else {
+      lottieController.dispose();
+    }
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isKeyboardVisible = !(MediaQuery.viewPaddingOf(context).bottom > 0);
     return GestureDetector(
