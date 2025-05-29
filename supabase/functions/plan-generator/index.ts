@@ -84,7 +84,7 @@ Deno.serve(async (req) => {
   /* 2 · persist */
   try {
     if (!isDebugMode) {
-      await savePlan(userId, size_hint, plan);
+      await savePlan(userId, size_hint, topic, plan);
     }
   } catch (dbErr) {
     console.error("[DB]", dbErr);

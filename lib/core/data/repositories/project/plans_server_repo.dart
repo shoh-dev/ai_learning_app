@@ -11,10 +11,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class PlansServerRepo extends PlansRepo {
   final SupabaseClient _supabase;
 
-  PlansServerRepo(this._supabase);
+  const PlansServerRepo(this._supabase);
 
   @override
-  Future<Result<Plan>> createPlan({
+  Future<Result<String>> createPlan({
     required String topic,
     required PlanSize size,
     required int retryAttempt,
@@ -30,8 +30,7 @@ class PlansServerRepo extends PlansRepo {
           'attempt': retryAttempt,
         },
       );
-      final plan = Plan.fromJson(response.data);
-      return Result.ok(plan);
+      return Result.ok(response.data['id']);
     } on TypeError catch (e, st) {
       log('Error creating plan TypeError: $e');
       log('Error creating plan TypeError st: $st');

@@ -1,5 +1,5 @@
 import 'package:ai_learning_app/core/data/utils.dart';
-import 'package:ai_learning_app/features/root/vm/root_vm.dart';
+import 'package:ai_learning_app/features/plans/view/plan_details_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -19,7 +19,7 @@ class PromptWidget extends StatelessWidget {
   final ValueChanged<PlanSize> onPlanSizeChanged;
   final TextEditingController topicController;
   final bool isLoading;
-  final VoidCallback onGeneratePlan;
+  final Future<Result<String>?> Function() onGeneratePlan;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,18 @@ class PromptWidget extends StatelessWidget {
                             ? null
                             : () {
                               context.unfocus();
-                              onGeneratePlan();
+                              onGeneratePlan().then((value) {
+                                if (value == null) return;
+                                value.fold(
+                                  (id) {
+                                    topicController.clear();
+                                    PlanDetailsView.push(context, id);
+                                  },
+                                  (_) {
+                                    //do nothing
+                                  },
+                                );
+                              });
                             },
                   );
                 },

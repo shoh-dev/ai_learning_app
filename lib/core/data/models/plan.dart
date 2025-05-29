@@ -8,12 +8,14 @@ import 'dart:convert';
 class Plan {
   final String id;
   final String topic;
+  final String originalTopic;
   final List<Milestone> milestones;
   final DateTime createdAt;
 
   Plan({
     required this.id,
     required this.topic,
+    required this.originalTopic,
     required this.milestones,
     required this.createdAt,
   });
@@ -23,6 +25,7 @@ class Plan {
     return Plan(
       id: json['id'],
       topic: json['topic'] ?? '',
+      originalTopic: json['original_topic'] ?? '',
       createdAt: DateTime.parse(json['created_at']),
       milestones:
           (json['milestones'] as List<dynamic>? ?? [])

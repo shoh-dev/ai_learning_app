@@ -11,6 +11,10 @@ import 'package:myspace_ui/myspace_ui.dart';
 class PlanDetailsView extends StatelessWidget {
   const PlanDetailsView({super.key});
 
+  static Future<void> push(BuildContext context, String planId) async {
+    await context.push("/plans/$planId");
+  }
+
   @override
   Widget build(BuildContext context) {
     return VmWatcher<PlanDetailsVm>(

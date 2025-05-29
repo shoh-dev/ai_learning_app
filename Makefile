@@ -3,3 +3,6 @@ watch:
 
 fbuild:
 	dart run build_runner build --delete-conflicting-outputs
+
+runfunc:
+	supabase functions serve --env-file supabase/.env

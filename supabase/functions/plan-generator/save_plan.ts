@@ -14,6 +14,7 @@ import { PlanResponse, Milestone, Substep } from "./types.ts";
 export async function savePlan(
   userId: string,
   sizeHint: string,
+  originalTopic: string,
   plan: PlanResponse
 ): Promise<string> {
   // ---------- 1 · insert into plans ----------
@@ -22,6 +23,7 @@ export async function savePlan(
     .insert({
       user_id: userId,
       topic: plan.topic,
+      original_topic: originalTopic,
       size_hint: sizeHint,
     })
     .select("id")

@@ -4,9 +4,9 @@ import 'package:ai_learning_app/features/root/vm/root_vm.dart';
 import 'package:myspace_core/myspace_core.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
-final rootLayout = UILayout(branches: [_rootBranch, ...plansLayout.branches]);
+final rootLayout = UILayout(branches: [_rootBranch]);
 
-final _rootBranch = UIBranch(pages: [_rootPage]);
+final _rootBranch = UIBranch(pages: [_rootPage, ...plansBranch.pages]);
 
 final _rootPage = UIPage(
   path: '/',

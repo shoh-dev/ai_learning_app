@@ -11,6 +11,7 @@ create table
     public.plans (
         id uuid primary key default gen_random_uuid (),
         topic text not null,
+        original_topic text default '',
         user_id uuid not null references auth.users (id) on delete cascade,
         size_hint text not null default 'large', -- 'small' | 'large'
         created_at timestamptz not null default now ()

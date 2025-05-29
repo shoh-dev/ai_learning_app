@@ -15,17 +15,18 @@ class PlansVm extends Vm {
 
   late final CommandNoParam<void> getPlansCommand;
 
-  final List<Plan> plans = [];
-  final List<Plan> filteredPlans = [];
-  bool isFiltered = false;
+  final List<Plan> _plans = [];
+  List<Plan> _filteredPlans = [];
+  bool _isFiltered = false;
 
-  List<Plan> get getPlans => isFiltered ? filteredPlans : plans;
+  List<Plan> get getPlans => _isFiltered ? _filteredPlans : _plans;
+  bool get isFilteredButEmpty => _isFiltered && _filteredPlans.isEmpty;
 
   Future<Result<void>> _getPlans() async {
     final result = await _plansRepo.getPlans();
-    result.fold((p0) {
-      plans.clear();
-      plans.addAll(p0);
+    result.fold<void>((p0) {
+      _plans.clear();
+      _plans.addAll(p0);
       notifyListeners();
     }, (p0) {});
 
@@ -33,18 +34,17 @@ class PlansVm extends Vm {
   }
 
   void _onSearch() {
+    _filteredPlans = [];
     if (searchController.text.isEmpty) {
-      filteredPlans.clear();
-      isFiltered = false;
+      _isFiltered = false;
     } else {
-      filteredPlans.clear();
-      final filter = plans.where(
+      final filter = _plans.where(
         (plan) => plan.topic.toLowerCase().contains(
           searchController.text.toLowerCase(),
         ),
       );
-      filteredPlans.addAll(filter);
-      isFiltered = true;
+      _filteredPlans = filter.toList();
+      _isFiltered = true;
     }
     notifyListeners();
   }

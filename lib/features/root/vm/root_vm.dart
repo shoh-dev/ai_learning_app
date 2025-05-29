@@ -24,7 +24,7 @@ class RootVm extends Vm {
     notifyListeners();
   }
 
-  late final CommandNoParam<void> generatePlanCommand;
+  late final CommandNoParam<String> generatePlanCommand;
 
   @override
   void dispose() {
@@ -32,7 +32,7 @@ class RootVm extends Vm {
     super.dispose();
   }
 
-  Future<Result<void>> _generatePlan() async {
+  Future<Result<String>> _generatePlan() async {
     final topic = topicController.text.trim();
     final size = planSize;
     final attempt = 1;
@@ -41,8 +41,6 @@ class RootVm extends Vm {
       size: size,
       retryAttempt: attempt,
     );
-    await Future.delayed(const Duration(milliseconds: 2000));
-    if (plan.isOk) topicController.clear();
     return plan;
   }
 }
