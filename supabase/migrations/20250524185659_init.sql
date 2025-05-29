@@ -29,6 +29,7 @@ create table
         description text not null,
         resource_url text,
         can_generate_image boolean not null default false,
+        generated_image_url text not null default '',
         created_at timestamptz not null default now ()
     );
 

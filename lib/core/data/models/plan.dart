@@ -42,27 +42,44 @@ class Plan {
   /// Convenience helper if you get the raw string
   static Plan fromJsonString(String src) =>
       Plan.fromJson(jsonDecode(src) as Map<String, dynamic>);
+
+  //replace plan milestone
+  Plan replaceMilestone(Milestone milestone) {
+    return Plan(
+      id: id,
+      topic: topic,
+      originalTopic: originalTopic,
+      createdAt: createdAt,
+      milestones:
+          milestones.map((e) => e.id == milestone.id ? milestone : e).toList(),
+    );
+  }
 }
 
 class Milestone {
+  final String id;
   final String title;
   final String description;
   final String? resourceUrl;
   final List<Substep> substeps;
   final Quiz? quiz;
   final bool canGenerateImage;
+  final String generatedImageUrl;
 
   Milestone({
+    required this.id,
     required this.title,
     required this.description,
     this.resourceUrl,
     required this.substeps,
     this.quiz,
     required this.canGenerateImage,
+    required this.generatedImageUrl,
   });
 
   factory Milestone.fromJson(Map json) {
     return Milestone(
+      id: json['id'] ?? '',
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       resourceUrl: json['resource_url'] as String?,
@@ -75,6 +92,7 @@ class Milestone {
               ? Quiz.fromJson(((json['quiz'] as List).firstOrNull ?? {}) as Map)
               : null,
       canGenerateImage: json['can_generate_image'] ?? false,
+      generatedImageUrl: json['generated_image_url'] ?? '',
     );
   }
 
@@ -86,6 +104,19 @@ class Milestone {
     if (quiz != null) 'quiz': quiz!.toJson(),
     'can_generate_image': canGenerateImage,
   };
+
+  Milestone copyWith({String? generatedImageUrl}) {
+    return Milestone(
+      id: id,
+      title: title,
+      description: description,
+      resourceUrl: resourceUrl,
+      substeps: substeps,
+      quiz: quiz,
+      canGenerateImage: canGenerateImage,
+      generatedImageUrl: generatedImageUrl ?? this.generatedImageUrl,
+    );
+  }
 }
 
 class Substep {

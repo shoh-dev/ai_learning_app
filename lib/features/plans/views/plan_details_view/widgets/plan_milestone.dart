@@ -1,6 +1,7 @@
 import 'package:ai_learning_app/core/data/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:myspace_core/myspace_core.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
@@ -9,10 +10,12 @@ class PlanMilestone extends StatelessWidget {
     super.key,
     required this.milestone,
     required this.onLaunchUrl,
+    required this.generateImageCommand,
   });
 
   final Milestone milestone;
   final Future<Result<void>> Function(String url) onLaunchUrl;
+  final CommandParam<void, String> generateImageCommand;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +92,41 @@ class PlanMilestone extends StatelessWidget {
             _card(context, [
               _title(context, 'Generate Image'),
               const SizedBox(height: 4),
-              ButtonComponent.primary(
-                text: 'Generate Image',
-                icon: Icons.image_rounded,
-                onPressed: () {},
-              ).sized(width: double.infinity),
+              if (milestone.generatedImageUrl.isEmpty)
+                CommandWrapper(
+                  command: generateImageCommand,
+                  builder: (context, child) {
+                    return ButtonComponent.primary(
+                      text: 'Generate Image',
+                      isLoading: generateImageCommand.isRunning,
+                      icon: Icons.image_rounded,
+                      onPressed: () async {
+                        final result = await generateImageCommand.execute(
+                          milestone.id,
+                        );
+                        result?.fold((_) {}, (e) {
+                          ErrorDialog.show(e.toString());
+                        });
+                      },
+                    ).sized(width: double.infinity);
+                  },
+                )
+              else
+                Image.network(
+                  milestone.generatedImageUrl.replaceAll(
+                    "kong:8000",
+                    '127.0.0.1:54321',
+                  ),
+                  width: double.infinity,
+                  fit: BoxFit.contain,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  },
+                  height: 300,
+                ),
             ]),
 
           if (milestone.quiz != null && milestone.quiz!.choices.isNotEmpty)

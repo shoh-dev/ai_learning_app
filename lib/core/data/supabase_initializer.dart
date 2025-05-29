@@ -9,6 +9,7 @@ abstract class SupabaseConstants {
   static const String planGeneratorMethod = 'plan-generator';
   static const String getPlansMethod = 'get-plans';
   static const String getPlanMethod = 'get-plan';
+  static const String generateImageMethod = 'generate-milestone-image';
   static const String plansTable = 'plans';
 }
 

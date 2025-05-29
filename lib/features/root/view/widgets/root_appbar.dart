@@ -1,3 +1,4 @@
+import 'package:ai_learning_app/widgets/leading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
@@ -11,10 +12,10 @@ class RootAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Home'),
       // centerTitle: true,
       actions: [
-        TextButton.icon(
+        LeadingButton(
           onPressed: () => context.push('/plans'),
-          label: Text('History'),
-          icon: Icon(Icons.history_rounded),
+          text: 'View History',
+          // icon: Icons.history_rounded,
         ),
         const SizedBox(width: 8),
       ],

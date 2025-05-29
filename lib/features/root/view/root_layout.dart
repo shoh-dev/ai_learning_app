@@ -1,4 +1,4 @@
-import 'package:ai_learning_app/features/plans/view/plans_layout.dart';
+import 'package:ai_learning_app/features/plans/views/plans_layout.dart';
 import 'package:ai_learning_app/features/root/view/root_view.dart';
 import 'package:ai_learning_app/features/root/vm/root_vm.dart';
 import 'package:myspace_core/myspace_core.dart';

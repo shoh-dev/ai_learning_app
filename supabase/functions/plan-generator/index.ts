@@ -4,7 +4,7 @@ import { PlanResponse } from "./types.ts";
 import { MOCK_PLAN } from "./mock_debug.ts";
 
 // inside the HTTP handler, AFTER we have `plan: PlanResponse`
-import { supabase } from "./supabase_client.ts";
+import { supabase } from "../_utils/supabase_client.ts";
 import { savePlan } from "./save_plan.ts";
 
 

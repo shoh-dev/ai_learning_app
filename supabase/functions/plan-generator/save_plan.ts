@@ -4,7 +4,7 @@
 // Generates UUIDs client-side so FK links are resolved before insert.
 // -----------------------------------------------------------
 
-import { supabase } from "./supabase_client.ts";
+import { supabase } from "../_utils/supabase_client.ts";
 import { PlanResponse, Milestone, Substep } from "./types.ts";
 
 /**

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ai_learning_app/core/data/models/models.dart';
@@ -76,6 +77,21 @@ class PlansServerRepo extends PlansRepo {
       return Result.ok(plan);
     } catch (e) {
       log('Error getting plan: $e');
+      return Result.error(e);
+    }
+  }
+
+  @override
+  Future<Result<String>> generateImage({required String milestoneId}) async {
+    try {
+      final response = await _supabase.functions.invoke(
+        SupabaseConstants.generateImageMethod,
+        method: HttpMethod.post,
+        body: {'milestone_id': milestoneId},
+      );
+      return Result.ok(response.data);
+    } catch (e) {
+      log('Error generating image: $e');
       return Result.error(e);
     }
   }

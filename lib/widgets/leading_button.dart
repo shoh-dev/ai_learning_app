@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:myspace_ui/myspace_ui.dart';
 
 class LeadingButton extends StatelessWidget {
   const LeadingButton({
     super.key,
     required this.text,
     this.icon,
-    required this.onPressed,
+    this.onPressed,
   });
 
   final String text;
   final IconData? icon;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ButtonComponent.text(text: text, icon: icon, onPressed: onPressed);
+    if (icon != null) {
+      return TextButton.icon(
+        onPressed: onPressed,
+        label: Text(text),
+        icon: Icon(icon),
+      );
+    }
+    return TextButton(onPressed: onPressed, child: Text(text));
   }
 }

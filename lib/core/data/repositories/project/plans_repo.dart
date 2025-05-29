@@ -13,4 +13,6 @@ abstract class PlansRepo extends Dependency {
   Future<Result<List<Plan>>> getPlans();
 
   Future<Result<Plan>> getPlan({required String id});
+
+  Future<Result<String>> generateImage({required String milestoneId});
 }

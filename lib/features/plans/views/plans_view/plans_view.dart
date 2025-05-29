@@ -1,5 +1,5 @@
 import 'package:ai_learning_app/core/data/models/plan.dart';
-import 'package:ai_learning_app/features/plans/view/plan_details_view.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/plan_details_view.dart';
 import 'package:ai_learning_app/features/plans/vm/plans_vm.dart';
 import 'package:ai_learning_app/widgets/leading_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,54 +20,62 @@ class PlansView extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(40),
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 9, top: 4),
-            child: CupertinoSearchTextField(controller: vm.searchController),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 4),
+            child: CupertinoSearchTextField(
+              controller: vm.searchController,
+              autocorrect: false,
+            ),
           ),
         ),
         leading: LeadingButton(
-          text: 'Home',
+          text: 'Back',
           icon: CupertinoIcons.chevron_back,
           onPressed: context.pop,
         ),
       ),
-      child: SafeArea(
-        bottom: false,
-        child: CommandWrapper(
-          command: vm.getPlansCommand,
-          builder: (context, child) {
-            final command = vm.getPlansCommand;
-            if (command.isRunning) {
-              return Center(child: CircularProgressIndicator.adaptive());
-            }
-            return child!;
-          },
-          child: VmSelector<PlansVm, (List<Plan>, bool)>(
-            selector: (ctx, vm) => (vm.getPlans, vm.isFilteredButEmpty),
-            builder: (context, plans, child) {
-              if (plans.$2) {
-                return Center(
-                  child: DefaultTextStyle(
-                    style: context.textTheme.titleMedium!,
-                    child: Text('No plans found'),
+      child: GestureDetector(
+        onTap: context.unfocus,
+        child: SafeArea(
+          bottom: false,
+          child: CommandWrapper(
+            command: vm.getPlansCommand,
+            builder: (context, child) {
+              final command = vm.getPlansCommand;
+              if (command.isRunning) {
+                return Center(child: CircularProgressIndicator.adaptive());
+              }
+              return child!;
+            },
+            child: VmSelector<PlansVm, (List<Plan>, bool)>(
+              selector: (ctx, vm) => (vm.getPlans, vm.isFilteredButEmpty),
+              builder: (context, plans, child) {
+                if (plans.$2) {
+                  return Center(
+                    child: DefaultTextStyle(
+                      style: context.textTheme.titleMedium!,
+                      child: Text('Not found'),
+                    ),
+                  );
+                }
+                return RefreshIndicator.adaptive(
+                  onRefresh: vm.getPlansCommand.execute,
+                  child: ListView.builder(
+                    itemCount: plans.$1.length,
+                    padding: EdgeInsets.only(top: 4, bottom: 40),
+                    itemBuilder: (context, index) {
+                      final plan = plans.$1[index];
+                      return CupertinoListTile.notched(
+                        title: Text(plan.topic),
+                        subtitle: Text(timeago.format(plan.createdAt)),
+                        onTap: () {
+                          PlanDetailsView.push(context, plan.id);
+                        },
+                      );
+                    },
                   ),
                 );
-              }
-              return RefreshIndicator.adaptive(
-                onRefresh: vm.getPlansCommand.execute,
-                child: ListView.builder(
-                  itemCount: plans.$1.length,
-                  padding: EdgeInsets.only(top: 4, bottom: 40),
-                  itemBuilder: (context, index) {
-                    final plan = plans.$1[index];
-                    return CupertinoListTile.notched(
-                      title: Text(plan.topic),
-                      subtitle: Text(timeago.format(plan.createdAt)),
-                      onTap: () => PlanDetailsView.push(context, plan.id),
-                    );
-                  },
-                ),
-              );
-            },
+              },
+            ),
           ),
         ),
       ),

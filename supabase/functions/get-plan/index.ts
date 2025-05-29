@@ -1,6 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-import { supabase } from "../plan-generator/supabase_client.ts"; // same client setup
+import { supabase } from "../_utils/supabase_client.ts"; // same client setup
 const JSON_HEADER = { "Content-Type": "application/json" };
 
 Deno.serve(async (req) => {

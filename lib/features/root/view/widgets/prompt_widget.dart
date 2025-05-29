@@ -1,5 +1,5 @@
 import 'package:ai_learning_app/core/data/utils.dart';
-import 'package:ai_learning_app/features/plans/view/plan_details_view.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/plan_details_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -55,6 +55,7 @@ class PromptWidget extends StatelessWidget {
                       color: context.theme.scaffoldBackgroundColor,
                       borderRadius: br,
                       child: TextField(
+                        autofocus: false,
                         decoration: InputDecoration(
                           hintText: "e.g. Learn Python from scratch",
                           hintStyle: context.textTheme.titleSmall!.copyWith(

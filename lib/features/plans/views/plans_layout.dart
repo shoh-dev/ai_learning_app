@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:ai_learning_app/features/plans/view/plan_details_view.dart';
-import 'package:ai_learning_app/features/plans/view/plans_view.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/plan_details_view.dart';
+import 'package:ai_learning_app/features/plans/views/plans_view/plans_view.dart';
 import 'package:ai_learning_app/features/plans/vm/plan_details_vm.dart';
 import 'package:ai_learning_app/features/plans/vm/plans_vm.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -13,7 +13,7 @@ final plansBranch = UIBranch(pages: [_plansPage]);
 
 final _plansPage = UIPage(
   path: '/plans',
-  transitionType: TransitionType.slideFromRight,
+  transitionType: TransitionType.cupertino,
   pages: [_planDetailsPage],
   builder:
       (context, state) => ChangeNotifierProvider(

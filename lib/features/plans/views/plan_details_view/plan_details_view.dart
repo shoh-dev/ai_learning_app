@@ -1,6 +1,6 @@
-import 'package:ai_learning_app/features/plans/view/widgets/milestone_progress.dart';
-import 'package:ai_learning_app/features/plans/view/widgets/plan_milestone.dart';
-import 'package:ai_learning_app/features/plans/view/widgets/plan_navibar.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/widgets/milestone_progress.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/widgets/plan_milestone.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/widgets/plan_navibar.dart';
 import 'package:ai_learning_app/features/plans/vm/plan_details_vm.dart';
 import 'package:ai_learning_app/widgets/leading_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,9 +31,14 @@ class PlanDetailsView extends StatelessWidget {
             // leadingWidth: 100,
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(4),
-              child: MilestoneProgress(
-                controller: vm.pageController,
-                progress: vm.milestoneProgress + .1,
+              child: ListenableBuilder(
+                listenable: vm.pageController,
+                builder: (context, _) {
+                  return MilestoneProgress(
+                    controller: vm.pageController,
+                    progress: vm.milestoneProgress + .1,
+                  );
+                },
               ),
             ),
           ),
@@ -83,6 +88,7 @@ class PlanDetailsView extends StatelessWidget {
                   key: Key(milestone.title),
                   milestone: milestone,
                   onLaunchUrl: vm.launchUrl,
+                  generateImageCommand: vm.generateImageCommand,
                 );
               },
             );

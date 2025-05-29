@@ -17,6 +17,7 @@ class PlanDetailsVm extends Vm {
        _plansRepo = plansRepo,
        _urlLauncherService = urlLauncherService {
     getPlanCommand = CommandNoParam(_getPlan)..execute();
+    generateImageCommand = CommandParam(_generateImage);
   }
 
   final PageController _pageController = PageController();
@@ -66,6 +67,19 @@ class PlanDetailsVm extends Vm {
 
   Future<Result<void>> launchUrl(String url) {
     return _urlLauncherService.laurnchUrl(url);
+  }
+
+  late final CommandParam<void, String> generateImageCommand;
+
+  Future<Result<void>> _generateImage(String milestoneId) async {
+    final response = await _plansRepo.generateImage(milestoneId: milestoneId);
+    response.fold((ok) {
+      _plan = _plan?.replaceMilestone(
+        currentMilestone!.copyWith(generatedImageUrl: ok),
+      );
+      notifyListeners();
+    }, (p0) {});
+    return response;
   }
 
   //milestone progress END
