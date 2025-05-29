@@ -1,6 +1,7 @@
 import 'package:ai_learning_app/core/data/utils.dart';
+import 'package:ai_learning_app/features/root/view/widgets/lottie_circle_avatar.dart';
+import 'package:ai_learning_app/features/root/view/widgets/lottie_loading.dart';
 import 'package:ai_learning_app/features/root/vm/root_vm.dart';
-import 'package:ai_learning_app/widgets/leading_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -14,6 +15,8 @@ class RootView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.theme.scaffoldBackgroundColor,
+        title: const Text('Home'),
+        centerTitle: true,
         actions: [
           Builder(
             builder: (context) {
@@ -31,42 +34,47 @@ class RootView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Builder(
-            builder: (context) {
-              final isKeyboardVisible =
-                  !(MediaQuery.viewPaddingOf(context).bottom > 0);
-              return GestureDetector(
-                onTap: context.unfocus,
-                child: CircleAvatar(radius: isKeyboardVisible ? 80 : 120),
-              );
+          const SizedBox(height: 20),
+          CommandWrapper(
+            command: context.read<RootVm>().generatePlanCommand,
+            builder: (context, child) {
+              final command = context.read<RootVm>().generatePlanCommand;
+              if (command.isRunning) {
+                return LottieLoading();
+              }
+              return const LottieCircleAvatar();
             },
           ),
           //Center text
           Expanded(
-            child: GestureDetector(
-              onTap: context.unfocus,
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.transparent,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 48),
-                  child: Builder(
-                    builder: (context) {
-                      final isKeyboardVisible =
-                          !(MediaQuery.viewPaddingOf(context).bottom > 0);
-                      return Text(
-                        'How can I help you this afternoon?',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: (isKeyboardVisible
-                                ? context.textTheme.headlineMedium
-                                : context.textTheme.headlineLarge)!
-                            .copyWith(color: context.colorScheme.onSurface),
-                      );
-                    },
+            child: Builder(
+              builder: (context) {
+                final isKeyboardVisible =
+                    !(MediaQuery.viewPaddingOf(context).bottom > 0);
+                if (isKeyboardVisible) return const SizedBox.shrink();
+                return GestureDetector(
+                  onTap: context.unfocus,
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 48),
+                      child: Builder(
+                        builder: (context) {
+                          return Text(
+                            "Every goal starts with a question. Let's build your path.",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.textTheme.headlineSmall!.copyWith(
+                              color: context.colorScheme.onSurface,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
 
@@ -120,52 +128,58 @@ class _BottomSheet extends StatelessWidget {
               const SizedBox(height: 12),
               Row(
                 spacing: 8,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
-                    child: PhysicalModel(
-                      elevation: 1,
-                      shadowColor: context.colorScheme.onSurface,
-                      color: context.theme.scaffoldBackgroundColor,
-                      borderRadius: context.borderRadius,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Enter Topic",
-                          hintStyle: context.textTheme.titleMedium!.copyWith(
-                            color: context.theme.disabledColor,
+                    child: Builder(
+                      builder: (context) {
+                        final br = BorderRadius.circular(18);
+                        return PhysicalModel(
+                          elevation: 1,
+                          shadowColor: context.colorScheme.onSurface,
+                          color: context.theme.scaffoldBackgroundColor,
+                          borderRadius: br,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "e.g. Learn Python from scratch",
+                              hintStyle: context.textTheme.titleSmall!.copyWith(
+                                color: context.theme.disabledColor,
+                              ),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: br,
+                              ),
+                            ),
+                            enabled: !vm.generatePlanCommand.isRunning,
+                            controller: vm.topicController,
+                            textInputAction: TextInputAction.newline,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            style: context.textTheme.titleSmall,
                           ),
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: context.borderRadius,
-                          ),
-                        ),
-                        enabled: !vm.generatePlanCommand.isRunning,
-                        controller: vm.topicController,
-                        textInputAction: TextInputAction.newline,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        style: context.textTheme.titleSmall,
-                      ),
+                        );
+                      },
                     ),
                   ),
                   ListenableBuilder(
@@ -176,7 +190,10 @@ class _BottomSheet extends StatelessWidget {
                         onPressed:
                             vm.topicController.text.trim().isEmpty
                                 ? null
-                                : vm.generatePlanCommand.execute,
+                                : () {
+                                  context.unfocus();
+                                  vm.generatePlanCommand.execute();
+                                },
                       );
                     },
                   ),

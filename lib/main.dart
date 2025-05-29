@@ -2,7 +2,6 @@ import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_server_repo.dart';
 import 'package:ai_learning_app/core/data/supabase_initializer.dart';
 import 'package:ai_learning_app/core/services/url_launcher_service.dart';
-import 'package:ai_learning_app/core/theming/theme.dart';
 import 'package:ai_learning_app/core/theming/theming.dart';
 import 'package:ai_learning_app/features/root/view/root_layout.dart';
 import 'package:flutter/material.dart';

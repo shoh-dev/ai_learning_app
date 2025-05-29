@@ -14,7 +14,7 @@ class RootVm extends Vm {
   }
 
   final topicController = TextEditingController(
-    text: 'Learn python from scratch',
+    // text: 'Learn python from scratch',
   );
 
   PlanSize _planSize = PlanSize.quick;
@@ -41,6 +41,7 @@ class RootVm extends Vm {
       size: size,
       retryAttempt: attempt,
     );
+    await Future.delayed(const Duration(milliseconds: 2000));
     if (plan.isOk) topicController.clear();
     return plan;
   }

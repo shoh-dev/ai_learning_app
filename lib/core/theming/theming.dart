@@ -14,7 +14,7 @@ AppTheme appTheme(BuildContext context) {
     //   outline: Colors.grey.shade300,
     // ),
     colorSchemeLight: ColorScheme.fromSeed(
-      seedColor: Colors.brown, //teal
+      seedColor: Colors.black, //teal
       surfaceContainerLow: Colors.white,
     ),
     scaffoldBackgroundColorLight: const Color(0xFFF5F7F8),
