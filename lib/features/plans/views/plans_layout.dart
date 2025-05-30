@@ -38,8 +38,9 @@ final _planDetailsPage = UIPage(
         create:
             (context) => PlanDetailsVm(
               planId: state.pathParameters['id']!,
-              plansRepo: context.read(),
               urlLauncherService: context.read(),
+              plansRepo: context.read(),
+              milestoneRepo: context.read(),
             ),
         builder: (context, child) => const PlanDetailsView(),
       ),

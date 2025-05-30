@@ -24,7 +24,7 @@ class PlanDetailsView extends StatelessWidget {
             backgroundColor: context.theme.scaffoldBackgroundColor,
             middle: Text(vm.plan?.topic ?? "Plan"),
             leading: LeadingButton(
-              text: 'Back',
+              text: 'History',
               icon: CupertinoIcons.chevron_back,
               onPressed: context.pop,
             ),
@@ -90,6 +90,7 @@ class PlanDetailsView extends StatelessWidget {
                   milestone: milestone,
                   onLaunchUrl: vm.launchUrl,
                   generateImageCommand: vm.generateImageCommand,
+                  onMarkQuizDone: vm.onMarkMilestoneQuizDone,
                 );
               },
             );

@@ -1,4 +1,5 @@
 import 'package:ai_learning_app/core/data/models/plan.dart';
+import 'package:ai_learning_app/core/data/repositories/project/milestone_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
 import 'package:ai_learning_app/core/services/url_launcher_service.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,17 @@ import 'package:myspace_core/myspace_core.dart';
 class PlanDetailsVm extends Vm {
   final String _planId;
   final PlansRepo _plansRepo;
+  final MilestoneRepo _milestoneRepo;
   final UrlLauncherService _urlLauncherService;
 
   PlanDetailsVm({
     required String planId,
     required PlansRepo plansRepo,
+    required MilestoneRepo milestoneRepo,
     required UrlLauncherService urlLauncherService,
   }) : _planId = planId,
        _plansRepo = plansRepo,
+       _milestoneRepo = milestoneRepo,
        _urlLauncherService = urlLauncherService {
     getPlanCommand = CommandNoParam(_getPlan)..execute();
     generateImageCommand = CommandParam(_generateImage);
@@ -92,6 +96,12 @@ class PlanDetailsVm extends Vm {
       notifyListeners();
     }, (p0) {});
     return result;
+  }
+
+  void onMarkMilestoneQuizDone() {
+    if (currentMilestone != null) {
+      _milestoneRepo.onMarkQuizDone(milestoneId: currentMilestone!.id);
+    }
   }
 
   @override

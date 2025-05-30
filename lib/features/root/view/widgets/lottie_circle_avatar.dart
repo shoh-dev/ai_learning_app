@@ -50,7 +50,7 @@ class _LottieCircleAvatarState extends State<LottieCircleAvatar>
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 100),
             width: double.infinity,
-            height: isKeyboardVisible ? 180 : 300,
+            height: isKeyboardVisible ? 200 : 300,
             child: Lottie.asset(
               'assets/animations/anim_lottie4.json',
               controller: lottieController,

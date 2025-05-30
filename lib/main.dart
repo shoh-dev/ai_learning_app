@@ -1,11 +1,11 @@
+import 'package:ai_learning_app/core/data/repositories/project/milestone_repo.dart';
+import 'package:ai_learning_app/core/data/repositories/project/milestone_server.repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_repo.dart';
 import 'package:ai_learning_app/core/data/repositories/project/plans_server_repo.dart';
 import 'package:ai_learning_app/core/data/supabase_initializer.dart';
 import 'package:ai_learning_app/core/services/url_launcher_service.dart';
 import 'package:ai_learning_app/core/theming/theming.dart';
 import 'package:ai_learning_app/features/root/view/root_layout.dart';
-import 'package:fluo/fluo_onboarding.dart';
-import 'package:fluo/l10n/fluo_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
 import 'package:myspace_ui/myspace_ui.dart';
@@ -26,6 +26,7 @@ void main() async {
   );
   final dependencies = [
     Provider<PlansRepo>(create: (context) => PlansServerRepo(supabase)),
+    Provider<MilestoneRepo>(create: (context) => MilestoneServerRepo(supabase)),
     Provider<UrlLauncherService>(create: (context) => UrlLauncherService()),
   ];
   final config = CoreAppConfig(

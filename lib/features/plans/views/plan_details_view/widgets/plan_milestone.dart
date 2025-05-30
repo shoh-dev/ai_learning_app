@@ -1,5 +1,4 @@
 import 'package:ai_learning_app/core/data/models/models.dart';
-import 'package:ai_learning_app/features/plans/views/plan_details_view/widgets/image_preview_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myspace_core/myspace_core.dart';
@@ -11,11 +10,13 @@ class PlanMilestone extends StatelessWidget {
     required this.milestone,
     required this.onLaunchUrl,
     required this.generateImageCommand,
+    required this.onMarkQuizDone,
   });
 
   final Milestone milestone;
   final Future<Result<void>> Function(String url) onLaunchUrl;
   final CommandParam<void, String> generateImageCommand;
+  final VoidCallback onMarkQuizDone;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +143,11 @@ class PlanMilestone extends StatelessWidget {
             _card(context, [
               _title(context, 'Quiz'),
               const SizedBox(height: 4),
-              _Quiz(quiz: milestone.quiz!),
+              _Quiz(
+                quiz: milestone.quiz!,
+                onMarkQuizDone: onMarkQuizDone,
+                isQuizDone: milestone.quizDone,
+              ),
             ]),
         ],
       ),
@@ -189,9 +194,15 @@ class PlanMilestone extends StatelessWidget {
 }
 
 class _Quiz extends StatefulWidget {
-  const _Quiz({required this.quiz});
+  const _Quiz({
+    required this.quiz,
+    required this.onMarkQuizDone,
+    required this.isQuizDone,
+  });
 
   final Quiz quiz;
+  final VoidCallback onMarkQuizDone;
+  final bool isQuizDone;
 
   @override
   State<_Quiz> createState() => _QuizState();
@@ -209,6 +220,22 @@ class _QuizState extends State<_Quiz> with AutomaticKeepAliveClientMixin {
     if (isCorrectSelected) return;
     setState(() {
       _selectedChoices.add(choice);
+      if (isCorrectSelected) {
+        widget.onMarkQuizDone();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.isQuizDone) {
+        setState(() {
+          _isExpanded = true;
+          _selectedChoices.add(correctChoice);
+        });
+      }
     });
   }
 

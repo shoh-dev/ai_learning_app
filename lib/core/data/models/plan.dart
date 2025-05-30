@@ -65,6 +65,7 @@ class Milestone {
   final Quiz? quiz;
   final bool canGenerateImage;
   final String generatedImageUrl;
+  final bool quizDone;
 
   Milestone({
     required this.id,
@@ -73,6 +74,7 @@ class Milestone {
     this.resourceUrl,
     required this.substeps,
     this.quiz,
+    this.quizDone = false,
     required this.canGenerateImage,
     required this.generatedImageUrl,
   });
@@ -93,6 +95,7 @@ class Milestone {
               : null,
       canGenerateImage: json['can_generate_image'] ?? false,
       generatedImageUrl: json['generated_image_url'] ?? '',
+      quizDone: json['quiz_done'] ?? false,
     );
   }
 
