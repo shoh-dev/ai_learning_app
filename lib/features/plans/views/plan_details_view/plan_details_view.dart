@@ -79,6 +79,7 @@ class PlanDetailsView extends StatelessWidget {
               return const SizedBox.shrink();
             }
             return PageView.builder(
+              scrollBehavior: CupertinoScrollBehavior(),
               physics: const ClampingScrollPhysics(),
               controller: vm.pageController,
               itemCount: vm.milestones.length,

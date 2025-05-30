@@ -1,7 +1,7 @@
 import 'package:ai_learning_app/core/data/models/models.dart';
+import 'package:ai_learning_app/features/plans/views/plan_details_view/widgets/image_preview_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:myspace_core/myspace_core.dart';
 import 'package:myspace_ui/myspace_ui.dart';
 
@@ -57,6 +57,7 @@ class PlanMilestone extends StatelessWidget {
                   builder: (context) {
                     final actionHint = substep.actionHint;
                     return ListTile(
+                      dense: true,
                       contentPadding: EdgeInsets.all(0),
                       visualDensity: VisualDensity.compact,
                       // leading: Icon(Icons.star_rounded), //todo: use action icon
@@ -112,20 +113,28 @@ class PlanMilestone extends StatelessWidget {
                   },
                 )
               else
-                Image.network(
-                  milestone.generatedImageUrl.replaceAll(
-                    "kong:8000",
-                    '127.0.0.1:54321',
+                Hero(
+                  tag: milestone.generatedImageUrl,
+                  child: GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: 'Image Preview',
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return CupertinoPageTransition(
+                            primaryRouteAnimation: animation,
+                            secondaryRouteAnimation: secondaryAnimation,
+                            linearTransition: true,
+                            child: _buildGeneratedImage(
+                              milestone.generatedImageUrl,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: _buildGeneratedImage(milestone.generatedImageUrl),
                   ),
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  },
-                  height: 300,
                 ),
             ]),
 
@@ -155,6 +164,27 @@ class PlanMilestone extends StatelessWidget {
 
   Widget _title(BuildContext context, String title) {
     return Text(title, style: context.textTheme.titleMedium);
+  }
+
+  Widget _buildGeneratedImage(String imageUrl) {
+    return InteractiveViewer(
+      panEnabled: true,
+      scaleEnabled: true,
+      panAxis: PanAxis.free,
+      child: Image.network(
+        milestone.generatedImageUrl.replaceAll("kong:8000", '127.0.0.1:54321'),
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return const Center(child: Text('Error loading image'));
+        },
+        fit: BoxFit.contain,
+        width: double.infinity,
+        height: 300,
+      ),
+    );
   }
 }
 

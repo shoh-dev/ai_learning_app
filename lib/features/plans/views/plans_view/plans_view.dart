@@ -28,7 +28,7 @@ class PlansView extends StatelessWidget {
           ),
         ),
         leading: LeadingButton(
-          text: 'Back',
+          text: 'Home',
           icon: CupertinoIcons.chevron_back,
           onPressed: context.pop,
         ),
